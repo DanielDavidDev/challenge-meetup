@@ -4,7 +4,7 @@
   "main": "index.js",
   "private": true,
   "repository": {
-    "url": ""
+    "url": "https://github.com/DanielDavidDev/challenge-meetup"
   },
   "author": "Daniel Felizardo <daniel.david772@gmail.com>",
   "license": "MIT",
