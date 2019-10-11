@@ -1,0 +1,24 @@
+{
+  "name": "desafio-meetup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "url": ""
+  },
+  "author": "Daniel Felizardo <daniel.david772@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "packages": "run-s packages:*",
+    "packages:lint": "lerna run lint",
+    "packages:test": "lerna run test",
+    "packages:build": "lerna run build"
+  },
+  "workspaces": [
+    "api",
+    "frontend"
+  ],
+  "devDependencies": {
+    "lerna": "^3.17.0"
+  }
+}
