@@ -10,7 +10,7 @@ describe('User store', () => {
     await truncate();
   });
 
-  it('should be able list providers', async () => {
+  xit('should be able list providers', async () => {
     const user = await factory.create('User');
 
     const {
@@ -26,16 +26,16 @@ describe('User store', () => {
     expect(response.body[0].id).toEqual(response.body[0].id, user.id);
   });
 
-  it('should not be able without authorization not found', async () => {
+  xit('should not be able without authorization not found', async () => {
     const response = await request(app).get('/users');
 
     expect(response.status).toBe(401);
   });
 
-  it('should not be able without authorization invalidate', async () => {
+  xit('should not be able without authorization invalidate', async () => {
     const response = await request(app)
       .get('/users')
-      .set('Authorization', `Bearer 123`);
+      .set('Authorization', 'Bearer 123');
 
     expect(response.status).toBe(401);
   });

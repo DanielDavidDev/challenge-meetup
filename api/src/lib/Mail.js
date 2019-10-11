@@ -7,7 +7,9 @@ import mailConfig from '../config/mail';
 
 class Mail {
   constructor() {
-    const { host, port, secure, auth } = mailConfig;
+    const {
+      host, port, secure, auth,
+    } = mailConfig;
 
     this.transporter = createTransport({
       host,
@@ -33,7 +35,7 @@ class Mail {
         }),
         viewPath,
         extName: '.hbs',
-      })
+      }),
     );
   }
 

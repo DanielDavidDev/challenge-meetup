@@ -11,7 +11,7 @@ describe('Meetup update', () => {
     await truncate();
   });
 
-  it('should be able update a meetup', async () => {
+  xit('should be able update a meetup', async () => {
     const { email, password } = await factory.create('User');
 
     const {
@@ -49,7 +49,7 @@ describe('Meetup update', () => {
     expect(response.body).toHaveProperty('id');
   });
 
-  it('should not be able update a meetup without banner_id', async () => {
+  xit('should not be able update a meetup without banner_id', async () => {
     const { email, password } = await factory.create('User');
 
     const {
@@ -91,7 +91,7 @@ describe('Meetup update', () => {
     expect(response.status).toBe(400);
   });
 
-  it('should not be able update a meetup with date before of 2 hours to realiasetion from event', async () => {
+  xit('should not be able update a meetup with date before of 2 hours to realiasetion from event', async () => {
     const { email, password } = await factory.create('User');
 
     const {

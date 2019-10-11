@@ -106,7 +106,7 @@ class MeetupController {
             attributes: ['id', 'name', 'email'],
           },
         ],
-      }
+      },
     );
 
     return res.json({

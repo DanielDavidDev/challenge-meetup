@@ -1,4 +1,6 @@
-import { object, string, date, number } from 'yup';
+import {
+  object, string, date, number,
+} from 'yup';
 
 export default async (req, res, next) => {
   try {

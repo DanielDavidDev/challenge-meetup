@@ -12,9 +12,11 @@ class User extends Model {
       },
       {
         sequelize,
-      }
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+      },
     );
-    this.addHook('beforeSave', async user => {
+    this.addHook('beforeSave', async (user) => {
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);
       }

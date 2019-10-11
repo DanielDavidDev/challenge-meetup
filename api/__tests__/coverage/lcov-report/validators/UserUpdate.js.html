@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">30% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>3/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">22.22% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>2/9</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -74,15 +74,11 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -93,28 +89,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { object, string, ref } from 'yup';
 &nbsp;
-export default async (req, res, next) =&gt; {
-  try {
-    const schema = object().shape({
+export default asyn<span class="fstat-no" title="function not covered" >c </span>(req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const schema = <span class="cstat-no" title="statement not covered" >object().shape({</span>
       name: string().strict(true),
       email: string()
         .strict(true)
@@ -125,21 +117,17 @@ export default async (req, res, next) =&gt; {
       password: string()
         .strict(true)
         .min(6)
-        .when('oldPassword', (oldPassword, field) =&gt;
-          oldPassword ? field.required() : field
-        ),
+        .when('oldPassword', <span class="fstat-no" title="function not covered" >(o</span>ldPassword, field) =&gt; (<span class="cstat-no" title="statement not covered" >oldPassword ? field.required() : field)</span>),
       confirmPassword: string()
         .strict(true)
-        .when('password', (password, field) =&gt;
-          password ? field.required().oneOf([ref('password')]) : field
-        ),
+        .when('password', <span class="fstat-no" title="function not covered" >(p</span>assword, field) =&gt; (<span class="cstat-no" title="statement not covered" >password ? field.required().oneOf([ref('password')]) : field)),</span>
     });
 &nbsp;
-    await schema.validate(req.body, { abortEarly: false });
+<span class="cstat-no" title="statement not covered" >    await schema.validate(req.body, { abortEarly: false });</span>
 &nbsp;
-    return next();
+<span class="cstat-no" title="statement not covered" >    return next();</span>
   } catch (err) {
-    return res.status(400).json({ error: { message: 'Validations failures' } });
+<span class="cstat-no" title="statement not covered" >    return res.status(400).json({ error: { message: 'Validations failures' } });</span>
   }
 };
 &nbsp;</pre></td></tr>
@@ -148,7 +136,7 @@ export default async (req, res, next) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 10 2019 13:30:45 GMT-0300 (Brasilia Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Oct 11 2019 03:41:02 GMT-0300 (Brasilia Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

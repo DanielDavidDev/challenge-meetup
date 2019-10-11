@@ -15,6 +15,7 @@ class SubscritionController {
     const subs = await Subscription.finddAll({
       where: {
         user_id: req.userId,
+        meetup_id: req.params.meetupId,
       },
       include: [
         {
@@ -52,57 +53,7 @@ class SubscritionController {
     }
 
     if (meetup.user_id === req.userId) {
-      return res
-        .status(400)
-        .json({ error: 'You can not subscribe on your meetup' });
-    }
-
-    const { date } = meetup;
-
-    // verifica a hora marcada no meetup
-    const hourStart = startOfHour(parseISO(date));
-
-    if (isBefore(hourStart, new Date())) {
-      return res.status(400).json({ error: 'Date invalid for subscription' });
-    }
-
-    const checkUserSubscription = await Subscription.findOne({
-      where: {
-        meetup_id: meetup.id,
-        user_id: req.userId,
-      },
-    });
-
-    if (checkUserSubscription) {
-      return res
-        .status(401)
-        .json({ error: 'You can not if subscription again' });
-    }
-
-    const checkDateSubs = await Subscription.findOne({
-      where: {
-        user_id: req.userId,
-      },
-      include: [
-        {
-          model: Meetup,
-          as: 'meetup',
-          where: {
-            date: meetup.date,
-          },
-        },
-        {
-          model: User,
-          as: 'user',
-          attributes: ['name', 'email'],
-        },
-      ],
-    });
-
-    if (checkDateSubs) {
-      return res
-        .status(401)
-        .json({ error: 'User has subscribed for meetup with that date' });
+      return res.status(400).json({ error: 'You can not subscribe on your meetup' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -152,9 +103,7 @@ class SubscritionController {
     });
 
     if (!subs) {
-      return res
-        .status(400)
-        .json({ error: 'You are not subscription that meetup.' });
+      return res.status(400).json({ error: 'You are not subscription that meetup.' });
     }
 
     await subs.destroy();

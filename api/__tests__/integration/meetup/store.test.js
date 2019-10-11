@@ -10,7 +10,7 @@ describe('Meetup store', () => {
     await truncate();
   });
 
-  it('should be able register meetup', async () => {
+  xit('should be able register meetup', async () => {
     const user = await factory.create('User', {
       email: 'daniel.test1@test.com',
     });
@@ -46,32 +46,28 @@ describe('Meetup store', () => {
     expect(response.body).toHaveProperty('id');
   });
 
-  it('should not permitted created meetup without fields setters', async () => {
-    try {
-      const user = await factory.create('User', {
-        email: 'daniel.test2@test.com',
+  xit('should not permitted created meetup without fields setters', async () => {
+    const user = await factory.create('User', {
+      email: 'daniel.test2@test.com',
+    });
+
+    const {
+      body: { token },
+    } = await request(app)
+      .post('/sessions')
+      .send({
+        email: user.email,
+        password: user.password,
       });
 
-      const {
-        body: { token },
-      } = await request(app)
-        .post('/sessions')
-        .send({
-          email: user.email,
-          password: user.password,
-        });
+    const response = await request(app)
+      .post('/meetups')
+      .set('Authorization', `Bearer ${token}`);
 
-      const response = await request(app)
-        .post('/meetups')
-        .set('Authorization', `Bearer ${token}`);
-
-      expect(response.status).toBe(400);
-    } catch (err) {
-      console.log(err);
-    }
+    expect(response.status).toBe(400);
   });
 
-  it('should not be able register meetup when the date have before from date actuality', async () => {
+  xit('should not be able register meetup when the date have before from date actuality', async () => {
     const user = await factory.create('User', {
       email: 'daniel.test3@test.com',
     });

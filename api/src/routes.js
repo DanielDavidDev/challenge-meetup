@@ -34,12 +34,9 @@ routes.get('/meetups/:id', MeetupController.show);
 routes.put('/meetups/:id', validateMeetupUpdate, MeetupController.update);
 routes.delete('/meetups/:id', MeetupController.delete);
 
-routes.get('/meetups/subscription', SubscriptionController.index);
-routes.post('/meetups/:meetupId/subscription', SubscriptionController.store);
-routes.delete(
-  '/meetups/:meetupId/subscription/:id',
-  SubscriptionController.delete
-);
+routes.get('/meetups/:meetupId/subscriptions', SubscriptionController.index);
+routes.post('/meetups/:meetupId/subscriptions', SubscriptionController.store);
+routes.delete('/meetups/:meetupId/subscriptions/:id', SubscriptionController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

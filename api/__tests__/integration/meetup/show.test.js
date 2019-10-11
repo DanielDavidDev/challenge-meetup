@@ -10,7 +10,7 @@ describe('Meetup show', () => {
     await truncate();
   });
 
-  it('should be able view data of a meetup', async () => {
+  xit('should be able view data of a meetup', async () => {
     const user = await factory.create('User', {
       email: 'daniel.test1@test.com',
     });
@@ -65,7 +65,7 @@ describe('Meetup show', () => {
       });
 
     const response = await request(app)
-      .get(`/meetups/0`)
+      .get('/meetups/0')
       .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(400);

@@ -23,7 +23,7 @@ class SubscriptionMail {
           "'dia' dd 'de' MMMM', ás' h:mm'h'",
           {
             locale: pt,
-          }
+          },
         ),
       },
     });

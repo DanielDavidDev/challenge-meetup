@@ -13,14 +13,10 @@ export default async (req, res, next) => {
       password: string()
         .strict(true)
         .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
+        .when('oldPassword', (oldPassword, field) => (oldPassword ? field.required() : field)),
       confirmPassword: string()
         .strict(true)
-        .when('password', (password, field) =>
-          password ? field.required().oneOf([ref('password')]) : field
-        ),
+        .when('password', (password, field) => (password ? field.required().oneOf([ref('password')]) : field)),
     });
 
     await schema.validate(req.body, { abortEarly: false });
