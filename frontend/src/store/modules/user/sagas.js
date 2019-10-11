@@ -1,4 +1,6 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import {
+  all, call, put, takeLatest,
+} from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { updateProfileFailure, updateProfileSuccess } from './actions';
@@ -7,7 +9,9 @@ import api from '~/services/api';
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, avatar_id, ...rest } = payload.data;
+    const {
+      name, email, avatar_id, ...rest
+    } = payload.data;
 
     const profile = {
       name,

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 
 export default function meetup(state = INITIAL_STATE, action) {
-  return produce(state, draft => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case '@meetup/ADD_MEETUP_SUCCESS': {
         draft.meetup = action.payload.data;

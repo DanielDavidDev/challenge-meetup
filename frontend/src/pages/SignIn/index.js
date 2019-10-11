@@ -10,14 +10,14 @@ import logo from '~/assets/logo.svg';
 
 const schema = Yup.object().shape({
   email: Yup.string('Insira um email válido!').required(
-    'The email is required'
+    'The email is required',
   ),
   password: Yup.string().required('The password is required'),
 });
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
+  const loading = useSelector((state) => state.auth.loading);
 
   function handleSubmit({ email, password }) {
     dispatch(signInRequest(email, password));

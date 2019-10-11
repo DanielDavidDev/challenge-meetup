@@ -15,10 +15,10 @@ const schema = Yup.object().shape({
   banner_id: Yup.number(),
   title: Yup.string().required('Title is required for create new meetapp.'),
   description: Yup.string().required(
-    'Description is required for create new meetapp.'
+    'Description is required for create new meetapp.',
   ),
   location: Yup.string().required(
-    'Location is required for create new meetapp.'
+    'Location is required for create new meetapp.',
   ),
   date: Yup.date().required('Date is required for create new meetapp.'),
 });

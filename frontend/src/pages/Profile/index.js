@@ -14,17 +14,13 @@ const schema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email(),
   oldPassword: Yup.string(),
-  password: Yup.string().when('oldPassword', (oldPassword, field) =>
-    oldPassword ? field.min(6).required() : field
-  ),
-  confirmPassword: Yup.string().when('password', (password, field) =>
-    password ? field.required().oneOf([Yup.ref('password')]) : field
-  ),
+  password: Yup.string().when('oldPassword', (oldPassword, field) => (oldPassword ? field.min(6).required() : field)),
+  confirmPassword: Yup.string().when('password', (password, field) => (password ? field.required().oneOf([Yup.ref('password')]) : field)),
 });
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.user.profile);
+  const profile = useSelector((state) => state.user.profile);
 
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data));

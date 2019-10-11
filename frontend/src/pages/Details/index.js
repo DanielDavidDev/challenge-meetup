@@ -14,17 +14,13 @@ const schema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email(),
   oldPassword: Yup.string(),
-  password: Yup.string().when('oldPassword', (oldPassword, field) =>
-    oldPassword ? field.min(6).required() : field
-  ),
-  confirmPassword: Yup.string().when('password', (password, field) =>
-    password ? field.required().oneOf([Yup.ref('password')]) : field
-  ),
+  password: Yup.string().when('oldPassword', (oldPassword, field) => (oldPassword ? field.min(6).required() : field)),
+  confirmPassword: Yup.string().when('password', (password, field) => (password ? field.required().oneOf([Yup.ref('password')]) : field)),
 });
 
 export default function Details() {
   const dispatch = useDispatch();
-  const meetapp = useSelector(state => state.meetup.meetup);
+  const meetapp = useSelector((state) => state.meetup.meetup);
 
   function handleEdit(data) {
     console.tron.log(data);

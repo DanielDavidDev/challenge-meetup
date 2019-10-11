@@ -6,7 +6,9 @@ import { MdKeyboardArrowRight, MdAddCircleOutline } from 'react-icons/md';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, EmptyContainer, Wrapper, List } from './styles';
+import {
+  Container, EmptyContainer, Wrapper, List,
+} from './styles';
 
 export default function Dashboard() {
   const [meetups, setMeetups] = useState([]);
@@ -61,7 +63,7 @@ export default function Dashboard() {
       </Wrapper>
       <List>
         {meetups.length ? (
-          meetups.map(meetup => (
+          meetups.map((meetup) => (
             <li key={meetup.id}>
               <strong>{meetup.title}</strong>
               <div>

@@ -7,7 +7,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default function DatePicker({ name, placeholder }) {
   const ref = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName, registerField, defaultValue, error,
+  } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ export default function DatePicker({ name, placeholder }) {
       name: fieldName,
       ref: ref.current,
       path: 'props.selected',
-      clearValue: pickerRef => {
+      clearValue: (pickerRef) => {
         pickerRef.clear();
       },
     });
@@ -27,7 +29,7 @@ export default function DatePicker({ name, placeholder }) {
       <ReactDatePicker
         name={fieldName}
         selected={selected}
-        onChange={date => setSelected(date)}
+        onChange={(date) => setSelected(date)}
         minDate={new Date()}
         showTimeSelect
         timeFormat="HH:mm"
