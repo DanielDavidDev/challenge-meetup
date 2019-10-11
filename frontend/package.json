@@ -46,7 +46,28 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "roots": [
+      "<rootDir>/__tests__"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ],
+    "moduleNameMapper": {
+      "^~/(.*)": "<rootDir>/src/$1"
+    },
+    "collectCoverageFrom": [
+      "!src/index.js",
+      "!src/services/api.js"
+    ],
+    "coverageDirectory": "__tests__/coverage"
+  },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.2",
+    "@testing-library/react": "^9.3.0",
     "babel-plugin-root-import": "^6.4.1",
     "customize-cra": "^0.5.0",
     "eslint": "^6.1.0",
