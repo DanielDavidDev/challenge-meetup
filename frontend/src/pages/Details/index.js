@@ -1,45 +1,101 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
-import { Container, Banner } from './styles';
+import api from '~/services/api';
+import history from '~/services/history';
+
+import Banner from '~/components/FileInput';
+import DatePicker from '~/components/DatePicker';
+
 import {
-  deleteMeetupRequest,
-  updateMeetupRequest,
-} from '~/store/modules/meetup/actions';
+  Container,
+  Buttons,
+  Wrapper,
+  ImageBanner,
+  Title,
+  Description,
+  Location,
+  Date,
+} from './styles';
 
-const schema = Yup.object().shape({
-  avatar_id: Yup.string(),
-  name: Yup.string(),
-  email: Yup.string().email(),
-  oldPassword: Yup.string(),
-  password: Yup.string().when('oldPassword', (oldPassword, field) => (oldPassword ? field.min(6).required() : field)),
-  confirmPassword: Yup.string().when('password', (password, field) => (password ? field.required().oneOf([Yup.ref('password')]) : field)),
-});
+export default function Details({ match }) {
+  const { id } = match.params;
 
-export default function Details() {
-  const dispatch = useDispatch();
-  const meetapp = useSelector((state) => state.meetup.meetup);
+  const [meetup, setMeetup] = useState(null);
+  const [loadding, setLoadding] = useState(false);
+  const [subscription, setSubscription] = useState(0);
 
-  function handleEdit(data) {
-    console.tron.log(data);
-    // dispatch(updateMeetupRequest(data));
+  async function handleEdit() {
+    history.push(`/meetup/${id}/update`);
   }
 
-  function handleDelete() {}
+  async function handleDelete() {
+    try {
+      await api.delete(`/meetups/${id}`);
+
+      setMeetup(null);
+      toast.success('That meetup deleted with success!');
+      history.push('/dashboard');
+    } catch (err) {
+      toast.error('Failure delete meetup!');
+    }
+  }
+
+
+  useEffect(() => {
+    async function loadMeetup() {
+      const response = await api.get(`meetups/${id}`);
+
+      setMeetup(response.data);
+    }
+    async function loadSubs() {
+      const response = await api.get(`/meetups/${id}/subscriptions`);
+      setSubscription(response.data.lenght);
+    }
+    setLoadding(true);
+    loadMeetup();
+    loadSubs();
+    setLoadding(false);
+  }, [id]);
 
   return (
     <Container>
-      <Form initialData={meetapp} schema={schema}>
-        <div>
-          <button type="submit" onClick={handleEdit}>
-            Editar
-          </button>
-          <button type="button">Delete</button>
-        </div>
-        <Banner src={meetapp.banner.url} alt="Banner" />
-      </Form>
+      {meetup ? (
+        <Buttons>
+        <button type="submit" onClick={handleEdit}>
+          Editar
+        </button>
+        <button type="button" onClick={handleDelete}>Delete</button>
+      </Buttons>
+      ) : null}
+      <Wrapper>
+        <section>
+          {meetup && (
+            <>
+              <ImageBanner src={meetup.banner.url}/>
+              <Title>{meetup.title}</Title>
+              <Description>{meetup.description}</Description>
+              <Location>{meetup.location}</Location>
+              <Date>{meetup.date}</Date>
+            </>
+          )}
+        </section>
+        <section>
+          {subscription}
+        </section>
+
+        <button type="submit" onClick={() => history.goBack()}>{loadding ? 'Carregando...' : 'Save'}</button>
+      </Wrapper>
     </Container>
   );
 }
+
+Details.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};

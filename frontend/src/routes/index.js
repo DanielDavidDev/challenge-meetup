@@ -7,7 +7,7 @@ import SignUp from '~/pages/SignUp';
 
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
-import NewMeetapp from '~/pages/NewMeetapp';
+import NewOrUpdate from '~/pages/NewOrUpdate';
 import Details from '~/pages/Details';
 
 export default function Routes() {
@@ -18,8 +18,9 @@ export default function Routes() {
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
-      <Route path="/meetups/new" component={NewMeetapp} isPrivate />
-      <Route path="/meetups/:title" component={Details} isPrivate />
+      <Route path="/meetups/:id" exact component={Details} isPrivate />
+      <Route path="/meetups/:action" exact component={NewOrUpdate} isPrivate />
+      <Route path="/meetups/:id/update" component={NewOrUpdate} isPrivate />
     </Switch>
   );
 }

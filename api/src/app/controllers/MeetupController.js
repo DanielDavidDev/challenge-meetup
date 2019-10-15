@@ -147,15 +147,26 @@ class MeetupController {
       return res.status(400).json({ error: 'Meetup not found!' });
     }
 
+    const {
+      id,
+      title,
+      description,
+      location,
+      date,
+      past,
+      user,
+      banner,
+    } = meetup;
+
     return res.json({
-      id: meetup.id,
-      title: meetup.title,
-      descrition: meetup.description,
-      location: meetup.location,
-      date: meetup.date,
-      past: meetup.past,
-      user: meetup.user,
-      banner: meetup.banner,
+      id,
+      title,
+      description,
+      location,
+      date,
+      past,
+      user,
+      banner,
     });
   }
 

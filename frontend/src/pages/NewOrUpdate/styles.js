@@ -3,7 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 920px;
-  margin: 50px auto;
+  margin: 30px auto auto;
   padding: 0 30px;
 
   form {
@@ -37,7 +37,7 @@ export const Container = styled.div`
 
     textarea {
       resize: none;
-      height: 130px;
+      height: 100px;
       padding: 15px;
     }
 
@@ -52,6 +52,8 @@ export const Container = styled.div`
       width: 180px;
       height: 44px;
       align-self: flex-end;
+      align-content: center;
+      justify-content: center;
       margin: 5px 0 0;
       background: #f94d6a;
       font-weight: bold;
@@ -60,6 +62,10 @@ export const Container = styled.div`
       border-radius: 4px;
       font-size: 16px;
       transition: background 0.2s;
+
+      svg {
+        margin-right: 8px;
+      }
 
       &:hover {
         background: ${darken(0.03, '#f94d6a')};
@@ -75,6 +81,47 @@ export const Container = styled.div`
       &:hover {
         opacity: 1;
       }
+    }
+    }
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0 0 20px 0;
+  padding: 5px;
+
+  > button {
+    margin: 0 10px 0 0;
+    align-self: flex-end;
+    background: #445ae3;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 16px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      background: #f94d6a;
+
+      &:hover {
+        background: ${darken(0.03, '#f94d6a')};
+      }
+    }
+
+    &:hover {
+      background: ${darken(0.03, '#445ae3')};
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: wait;
     }
   }
 `;

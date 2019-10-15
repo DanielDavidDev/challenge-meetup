@@ -19,11 +19,6 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!user.provider) {
-      toast.error('Usuário não é um provedor.');
-      return;
-    }
-
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');
@@ -51,7 +46,6 @@ export function* signUp({ payload }) {
       name,
       email,
       password,
-      provider: true,
     });
 
     toast.success('User cadastrado com sucesso!');

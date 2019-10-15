@@ -15,30 +15,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadMeetups() {
-      const date = new Date();
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      const year = date.getFullYear();
+      const response = await api.get('meetups');
 
-      if (date.getDate() < 10) {
-        day = `0${day}`;
-      }
-      if (date.getMonth() < 10) {
-        month = `0${month}`;
-      }
+      const data = response.data.map((meetup) => ({
+        ...meetup,
+        formattedDate: format(parseISO(meetup.date), "dd/MM/Y - HH'h'mm"),
+      }));
 
-      const dateFormatted = `${year}-${month}-${day}`;
-      try {
-        const response = await api.get('meetups', {
-          params: {
-            page: 1,
-            date: `${dateFormatted}`,
-          },
-        });
-        setMeetups(response.data);
-      } catch (err) {
-        console.tron.log(err);
-      }
+      setMeetups(data);
     }
 
     loadMeetups();
@@ -48,8 +32,8 @@ export default function Dashboard() {
     history.push('meetups/new');
   }
 
-  function handleChange({ title }) {
-    history.push(`meetups/${title}`);
+  function handleChange(id) {
+    history.push(`meetups/${id}`);
   }
 
   return (
@@ -72,7 +56,7 @@ export default function Dashboard() {
                     locale: pt,
                   })}
                 </p>
-                <button type="submit" onClick={() => handleChange(meetup)}>
+                <button type="submit" onClick={() => handleChange(meetup.id)}>
                   <MdKeyboardArrowRight size={26} color="#fff" />
                 </button>
               </div>
