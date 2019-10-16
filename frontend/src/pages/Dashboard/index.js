@@ -29,11 +29,11 @@ export default function Dashboard() {
   }, []);
 
   function handleAddMeetup() {
-    history.push('meetups/new');
+    history.push('meetups');
   }
 
   function handleChange(id) {
-    history.push(`meetups/${id}`);
+    history.push(`meetups/details/${id}`);
   }
 
   return (

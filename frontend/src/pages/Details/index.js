@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
-
-import Banner from '~/components/FileInput';
-import DatePicker from '~/components/DatePicker';
 
 import {
   Container,
@@ -18,6 +14,9 @@ import {
   Description,
   Location,
   Date,
+  Meetup,
+  Content,
+  Loadding,
 } from './styles';
 
 export default function Details({ match }) {
@@ -28,65 +27,64 @@ export default function Details({ match }) {
   const [subscription, setSubscription] = useState(0);
 
   async function handleEdit() {
-    history.push(`/meetup/${id}/update`);
+    history.push(`/meetups/${id}/update`);
   }
 
   async function handleDelete() {
     try {
+      setLoadding(true);
       await api.delete(`/meetups/${id}`);
 
       setMeetup(null);
       toast.success('That meetup deleted with success!');
+      setLoadding(false);
       history.push('/dashboard');
     } catch (err) {
       toast.error('Failure delete meetup!');
     }
   }
 
-
   useEffect(() => {
     async function loadMeetup() {
-      const response = await api.get(`meetups/${id}`);
-
-      setMeetup(response.data);
-    }
-    async function loadSubs() {
-      const response = await api.get(`/meetups/${id}/subscriptions`);
-      setSubscription(response.data.lenght);
+      const meetupsResponse = await api.get(`meetups/${id}`);
+      const subsResponse = await api.get(`/meetups/${id}/subscriptions`);
+      setMeetup(meetupsResponse.data);
+      setSubscription(subsResponse.data.length);
     }
     setLoadding(true);
     loadMeetup();
-    loadSubs();
     setLoadding(false);
   }, [id]);
 
   return (
     <Container>
-      {meetup ? (
         <Buttons>
-        <button type="submit" onClick={handleEdit}>
-          Editar
+        <button type="submit" onClick={handleEdit}>Editar</button>
+        <button type="button" onClick={handleDelete} disabled={loadding}>
+          {loadding ? '...' : 'Delete'}
         </button>
-        <button type="button" onClick={handleDelete}>Delete</button>
       </Buttons>
-      ) : null}
       <Wrapper>
         <section>
-          {meetup && (
-            <>
+          {meetup ? (
+            <Meetup>
               <ImageBanner src={meetup.banner.url}/>
-              <Title>{meetup.title}</Title>
-              <Description>{meetup.description}</Description>
-              <Location>{meetup.location}</Location>
-              <Date>{meetup.date}</Date>
-            </>
+              <Content>
+                <Title>{meetup.title}</Title>
+                <Description>{meetup.description}</Description>
+
+                <Location>{meetup.location}</Location>
+                <Date>{meetup.date}</Date>
+                {subscription}
+              </Content>
+            </Meetup>
+          ) : (
+            <Loadding>
+              Loading...
+            </Loadding>
           )}
         </section>
-        <section>
-          {subscription}
-        </section>
-
-        <button type="submit" onClick={() => history.goBack()}>{loadding ? 'Carregando...' : 'Save'}</button>
+        <button type="submit" onClick={() => history.goBack()}>Voltar</button>
       </Wrapper>
     </Container>
   );
@@ -95,7 +93,7 @@ export default function Details({ match }) {
 Details.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     }),
   }).isRequired,
 };

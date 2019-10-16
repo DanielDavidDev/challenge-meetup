@@ -12,7 +12,7 @@ import Queue from '../../lib/Queue';
 class SubscritionController {
   // listar as inscrições daquele meetup
   async index(req, res) {
-    const subs = await Subscription.finddAll({
+    const subs = await Subscription.findAll({
       where: {
         user_id: req.userId,
         meetup_id: req.params.meetupId,
@@ -30,7 +30,6 @@ class SubscritionController {
         },
       ],
       attributes: ['id', 'meetup_id'],
-      order: [['meetups', 'date', 'ASC']],
     });
 
     return res.json(subs);
@@ -43,7 +42,7 @@ class SubscritionController {
         {
           model: User,
           as: 'user',
-          attributes: ['name', 'email'],
+          attributes: ['id', 'name', 'email'],
         },
       ],
     });

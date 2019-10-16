@@ -4,7 +4,6 @@ import { darken } from 'polished';
 export const Container = styled.div`
   max-width: 920px;
   margin: 30px auto auto;
-  padding: 0 30px;
 `;
 
 export const Buttons = styled.div`
@@ -12,18 +11,16 @@ export const Buttons = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   margin: 0 0 20px 0;
-  padding: 5px;
 
   > button {
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 0;
     align-self: flex-end;
     background: #445ae3;
     font-weight: bold;
-    letter-spacing: 0.5px;
     color: #fff;
     border: 0;
     border-radius: 4px;
-    padding: 10px 14px;
+    padding: 10px 15px;
     font-size: 16px;
     transition: background 0.2s;
     display: flex;
@@ -51,6 +48,15 @@ export const Buttons = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  section {
+    width: 920px;
+    max-width: 920px;
+    height: auto;
+    background: #402845;
+    margin-bottom: 10px;
+    border-radius: 0 5px 5px;
+  }
 
   input,
   textarea {
@@ -126,12 +132,46 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const ImageBanner = styled.img``;
+export const Meetup = styled.div`
+  width: 920px;
+`;
 
-export const Title = styled.h1``;
+export const Content = styled.div`
+  max-width: 920px;
+  margin: 50px auto;
+  padding: 0 30px;
+`;
 
-export const Description = styled.p``;
+export const ImageBanner = styled.img`
+  max-width: 920px;
+  width: 920px;
+  height: 300px;
+`;
 
-export const Location = styled.p``;
+export const Title = styled.h1`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+export const Description = styled.p`
+  margin-top: 10px;
+  font-size: 17px;
+`;
+
+export const Location = styled.p`
+
+`;
 
 export const Date = styled.span``;
+
+export const Loadding = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 920px;
+  min-height: 50vh;
+  margin: 50px auto;
+  padding: 0 30px;
+  font-size: 25px;
+  font-weight: bold;
+`;
